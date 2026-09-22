@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+<h2>🛒 Your Cart</h2>
+
+{% if cart.items.all %}
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in cart.items.all %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>৳{{ item.product.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>৳{{ item.get_total_price }}</td>
+        <td>
+            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm">Remove</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr class="table-success">
+            <td colspan="3"><strong>Total</strong></td>
+            <td colspan="2"><strong>৳{{ cart.get_total }}</strong></td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="d-flex gap-2">
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Continue Shopping</a>
+    <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout →</a>
+</div>
+
+{% else %}
+<div class="text-center mt-5">
+    <h4 class="text-muted">Your cart is empty!</h4>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">Shop Now</a>
+</div>
+{% endif %}
+{% endblock %}
