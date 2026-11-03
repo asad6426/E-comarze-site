@@ -1,0 +1,17 @@
+# Python
+venv/
+.venv/
+env/
+v/
+__pycache__/
+*.py[cod]
+
+# Secrets and local data
+.env
+*.sqlite3
+
+# Editor and OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
